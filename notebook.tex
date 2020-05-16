@@ -1,0 +1,1276 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{project}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \subsubsection{\texorpdfstring{\textbf{INFO 2950 Final
+Project}}{INFO 2950 Final Project}}\label{info-2950-final-project}
+
+    \section{Relationships between county demographics and coronavirus
+outbreaks}\label{relationships-between-county-demographics-and-coronavirus-outbreaks}
+
+    The coronavirus pandemic has drastically changed American life as we
+know it for the time being. The disease has touched every corner of the
+US, from coast to coast, from the largest urban cities to the smallest
+rural towns. The disease spread has been rapid and alarming, especially
+considering how dangerous the virus is. As a result, states have enacted
+stay-at-home and social distancing policies to try and curb the spread
+of the disease.
+
+This has impacted nearly all facets of life. Over 30 million Americans
+have lost their jobs. Many who are still employed are working remotely,
+while still more essential workers are feeling the pressure of working
+on the front lines during this crisis.
+
+How this may have long term effects on communities and vulnerable
+populations remains to be seen. Additionally, understanding regions and
+demographics that are particularly at risk for the spread of the disease
+could help inform social distancing policies, and allow us the allocate
+resources and react to new outbreaks more quickly.
+
+The data description section will give a better understanding of the
+data we will be looking at to search for these trends.
+
+    \subsection{Data description}\label{data-description}
+
+What are the observations (rows) and the attributes (columns)? * The
+main dataset I've imported for this project is called finaldataset.csv,
+which is represented by the variable fulldata * Each row of data
+represents information about a US county on a specific date. * The
+columns keep track of information about each county's status related to
+coronavirus, such as total number of cases, as well as demographic
+information about the county. * The demographic county information is
+static from day to day, so there is a lot of repeated information in the
+columns, but this still seemed like the easiest way to keep all the
+information together. * Here is a list of all the attributes from the
+dataset, as well as a definition for categories that are not
+self-explantory:
+
+\begin{verbatim}
+* FIPS :
+* State :
+* Area_name :
+* Rural_urban_continuum_code :
+* Urban_influence_code :
+* Metro_2013 : 
+* **TODO**
+\end{verbatim}
+
+Why was this dataset created? * This dataset was created to explore how
+economic and demographic factors may relate to areas that are
+particularly hard-hit by the virus. It combines three datasets from
+different sources. * The coronavirus case data was created by the New
+York Times for use in their own reporting and data visualizations. * The
+Social Vulnerability Index (SVI) was created to identify and classify
+vulnerable populations, so that governing agencies could develop
+emergency-preparedness analysis and plans. It provides county data about
+population vulnerability based on demographic measurements of a variety
+of factors. These factors are categorized by "socioeconomic status",
+"household composition \& disability", "minority status \& languge", and
+"housing type and transportation." * The county economic data was
+created by the Local Area Unemployment Statistics to measure economic
+growth and progress. It includes measures such as the rurality of the
+county, employment rates, median income, and median income relative to
+the rest of the state.
+
+Who funded the creation of the dataset? * Coronavirus data is created
+and funded by the New York Times. * SVI data is created and funded by
+the government, specifically the Center for Disease Control (CDC) and
+Agency for Toxic Substances and Disease Registry (ATSDR) * Unemployment
+data is created and funded by the US Economic Research Service
+
+What processes might have influenced what data was observed and recorded
+and what was not? * The main issue with the coronavirus data is just
+massive lack of and inconsistencies with testing. * This has multiple
+effects: first, it is likely that deaths caused by coronavirus are being
+undercounted * Also, it likely is drastically undercounting the number
+of cases of the disease. I suspect this is even more true in lower
+income and more rural communities, where testing is lagging the most. *
+One metric I also track is the first day of the reported case in the
+county, which I also use to calculate spread speed. I think lack of
+testing may heavily influence the accuracy of this value. *
+Additionally, sometimes SVI data uses a dummy value of zero if the
+calculation to estimate it caused a divide by zero error. I believe this
+mostly occurs when there is incomplete census data for an area, which is
+probably most frequently in more rural towns with lower incomes and/or
+less internet access.
+
+What preprocessing was done, and how did the data come to be in the form
+that you are using? * I did almost all my preprocessing in a seperate
+notebook called preproc.ipynb. * I imported my three datasets (covid,
+svi, and unemployment) into the notebook. In doing this, I made sure my
+FIPS codes were imported as strings (to allow for leading zeros to be
+preserved). * I merged the three datasets on the FIPS attribute. * I
+also filtered out quite a few columns from the SVI and unemployment
+data, because these were very large datasets. * I also added several
+columns of my own by calculating information from other parts of the
+set. * After I finished, I saved the information into a CSV file called
+'finaldataset.csv' * I found the processing of the data to be one of the
+most time consuming aspects of the project. Because the dataset was so
+large, it was unwieldy to manage at first. Additionally, having to
+upload/save/modify these large files could be time consuming, especially
+when I made a mistake. For instance, at one point, I accidentally wrote
+a 1.5 gigabyte dataframe to a csv file, which took a long time with my
+not-super-powerful laptop. * At right around 35 megabytes, my final
+dataset is large but manageable. I'm hoping to filter out some columns I
+don't end up using at the end of the project to make it smaller still.
+
+If people are involved, were they aware of the data collection and if
+so, what purpose did they expect the data to be used for? * The SVI and
+economic data is government data compiled from census information. * The
+coronavirus data is also sourced from local/state level press releases.
+* All the information is very depersonalized and shows county-level
+demographics, so I don't think that it poses any substantial privacy
+concerns. * I think people generally expect for the government to
+collect depersonalized data like the ones shown. People would expect
+that this type of information might be used in a very broad sense to
+shape policies or at least inform legislators in their decision-making.
+* The New York Times has generously made their collected coronavirus
+data open-source. I believed they hope that sharing this aggregated data
+could help other people understand and study the virus outbreak.
+
+Where can your raw source data be found, if applicable? Provide a link
+to the raw data (hosted in a Cornell Google Drive or Cornell Box). *
+Here is the link to my final, curated dataset:
+https://cornell.box.com/v/akl65-info2950 * Here is a link to the New
+York Times covid data :
+https://github.com/nytimes/covid-19-data/blob/master/us-counties.csv *
+Here is a link to the download for the Social Vulnerability Index :
+https://svi.cdc.gov/data-and-tools-download.html * Here is a link to the
+download for the county level employment data :
+https://www.ers.usda.gov/data-products/county-level-data-sets/download-data/
+* My entire project, including all these datasets is also available at :
+https://github.com/Annika18/covid-final-project
+
+    \subsection{Importing libraries and
+data}\label{importing-libraries-and-data}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+         \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{linear\PYZus{}model} \PY{k}{import} \PY{n}{LinearRegression}\PY{p}{,} \PY{n}{LogisticRegression}
+         \PY{k+kn}{import} \PY{n+nn}{plotly}
+         \PY{k+kn}{from} \PY{n+nn}{numpy} \PY{k}{import} \PY{n}{percentile}
+         
+         \PY{k+kn}{from} \PY{n+nn}{urllib}\PY{n+nn}{.}\PY{n+nn}{request} \PY{k}{import} \PY{n}{urlopen}
+         \PY{k+kn}{import} \PY{n+nn}{json}
+         \PY{k}{with} \PY{n}{urlopen}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{https://raw.githubusercontent.com/plotly/datasets/master/geojson\PYZhy{}counties\PYZhy{}fips.json}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)} \PY{k}{as} \PY{n}{response}\PY{p}{:}
+             \PY{n}{counties} \PY{o}{=} \PY{n}{json}\PY{o}{.}\PY{n}{load}\PY{p}{(}\PY{n}{response}\PY{p}{)}
+             
+         \PY{k+kn}{import} \PY{n+nn}{plotly}\PY{n+nn}{.}\PY{n+nn}{express} \PY{k}{as} \PY{n+nn}{px}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}139}]:} \PY{k+kn}{from} \PY{n+nn}{scipy}\PY{n+nn}{.}\PY{n+nn}{special} \PY{k}{import} \PY{n}{comb}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}202}]:} \PY{k+kn}{from} \PY{n+nn}{sklearn}\PY{n+nn}{.}\PY{n+nn}{cluster} \PY{k}{import} \PY{n}{KMeans}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{n}{fulldata} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{finaldataset.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{dtype}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n+nb}{str}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{fulldata}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}2}]:}     FIPS State           Area\_name  Rural\_urban\_continuum\_code\_2013  \textbackslash{}
+        0  01001    AL  Autauga County, AL                              2.0   
+        1  01001    AL  Autauga County, AL                              2.0   
+        2  01001    AL  Autauga County, AL                              2.0   
+        3  01001    AL  Autauga County, AL                              2.0   
+        4  01001    AL  Autauga County, AL                              2.0   
+        
+           Urban\_influence\_code\_2013  Metro\_2013  Civilian\_labor\_force\_2018  \textbackslash{}
+        0                        2.0         1.0                      25957   
+        1                        2.0         1.0                      25957   
+        2                        2.0         1.0                      25957   
+        3                        2.0         1.0                      25957   
+        4                        2.0         1.0                      25957   
+        
+           Employed\_2018  Unemployed\_2018  Unemployment\_rate\_2018     {\ldots}       \textbackslash{}
+        0          25015              942                     3.6     {\ldots}        
+        1          25015              942                     3.6     {\ldots}        
+        2          25015              942                     3.6     {\ldots}        
+        3          25015              942                     3.6     {\ldots}        
+        4          25015              942                     3.6     {\ldots}        
+        
+           RPL\_THEME2  RPL\_THEME3 RPL\_THEME4 RPL\_THEMES cases\_per\_capita  \textbackslash{}
+        0       0.581      0.5947     0.3741     0.4354         0.000018   
+        1       0.581      0.5947     0.3741     0.4354         0.000072   
+        2       0.581      0.5947     0.3741     0.4354         0.000109   
+        3       0.581      0.5947     0.3741     0.4354         0.000109   
+        4       0.581      0.5947     0.3741     0.4354         0.000109   
+        
+           cases\_per\_100k    density  first\_day  days\_since\_first spread\_speed  
+        0        1.811594  92.859967       63.0               0.0     1.000000  
+        1        7.246377  92.859967       63.0               1.0     7.246377  
+        2       10.869565  92.859967       63.0               2.0     5.434783  
+        3       10.869565  92.859967       63.0               3.0     3.623188  
+        4       10.869565  92.859967       63.0               4.0     2.717391  
+        
+        [5 rows x 47 columns]
+\end{Verbatim}
+            
+    A quirk worth noting about this data: unfortunately, the New York Times
+data combines the five boroughs (counties) that make up New York City
+into row to represent the whole city. For this reason, there was no
+valid way to merge it with the county level data -\/- it didn't have a
+FIPs code and it would be too time-consuming for the scope of this
+project to try to combine the borough data from the other data sets
+using some sort of weighted average system.
+
+Instead, I created an extra dataset called nyc of just the covid cases
+in New York City, to be used for comparisons.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{covid} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{covid2.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{covid}\PY{o}{.}\PY{n}{rename}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{fips}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{\PYZcb{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+        
+        \PY{n}{covid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{to\PYZus{}datetime}\PY{p}{(}\PY{n}{covid}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        \PY{n}{start\PYZus{}date} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{Timestamp}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{2020\PYZhy{}01\PYZhy{}21}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{covid}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{daysafter}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{n}{covid}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{date}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{start\PYZus{}date}\PY{p}{)}\PY{o}{.}\PY{n}{dt}\PY{o}{.}\PY{n}{days}
+        
+        \PY{n}{nyc} \PY{o}{=} \PY{n}{covid}\PY{p}{[}\PY{n}{covid}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{New York City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{nyc} \PY{o}{=} \PY{n}{nyc}\PY{o}{.}\PY{n}{assign}\PY{p}{(}\PY{n}{cases\PYZus{}per\PYZus{}capita} \PY{o}{=} \PY{n}{nyc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{/}\PY{l+m+mi}{8398748}\PY{p}{)}
+        \PY{n}{nyc}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}3}]:}           date         county     state  FIPS  cases  deaths  daysafter  \textbackslash{}
+        416 2020-03-01  New York City  New York   NaN      1       0         40   
+        448 2020-03-02  New York City  New York   NaN      1       0         41   
+        482 2020-03-03  New York City  New York   NaN      2       0         42   
+        518 2020-03-04  New York City  New York   NaN      2       0         43   
+        565 2020-03-05  New York City  New York   NaN      4       0         44   
+        
+             cases\_per\_capita  
+        416      1.190654e-07  
+        448      1.190654e-07  
+        482      2.381307e-07  
+        518      2.381307e-07  
+        565      4.762615e-07  
+\end{Verbatim}
+            
+    If we are not mapping the change in COVID over time, it will be easiest
+to look at the data just using the most recent day. I create the
+latest\_date data subset for this. This data is current as of May 5,
+because it was going to be impractical for me to continue downloading
+and reprocessing the New York Times data every day.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}196}]:} \PY{n}{latest\PYZus{}date} \PY{o}{=} \PY{n}{fulldata}\PY{p}{[}\PY{n}{fulldata}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{==}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2020\PYZhy{}05\PYZhy{}05}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{latest\PYZus{}date} \PY{o}{=} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{n}{latest\PYZus{}date}\PY{o}{.}\PY{n}{FIPS} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{35039}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of counties with cases as of May 5: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Number of counties with cases as of May 5:  2859
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}333}]:} \PY{c+c1}{\PYZsh{} prints a five number summary of a series}
+          \PY{k}{def} \PY{n+nf}{five\PYZus{}num\PYZus{}summary}\PY{p}{(}\PY{n}{series}\PY{p}{)}\PY{p}{:}
+              \PY{n}{mini} \PY{o}{=} \PY{n}{series}\PY{o}{.}\PY{n}{min}\PY{p}{(}\PY{p}{)}
+              \PY{n}{maxi} \PY{o}{=} \PY{n}{series}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}
+              \PY{n}{quart1} \PY{o}{=} \PY{n}{percentile}\PY{p}{(}\PY{n}{series}\PY{p}{,} \PY{l+m+mi}{25}\PY{p}{)} 
+              \PY{n}{med} \PY{o}{=} \PY{n}{series}\PY{o}{.}\PY{n}{median}\PY{p}{(}\PY{p}{)}
+              \PY{n}{quart3} \PY{o}{=} \PY{n}{percentile}\PY{p}{(}\PY{n}{series}\PY{p}{,} \PY{l+m+mi}{75}\PY{p}{)} 
+          
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{min:    }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{mini}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q1:     }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{quart1}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{median: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{med}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Q3:     }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{quart3}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{max:    }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{maxi}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}89}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Five number summary of cases}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{five\PYZus{}num\PYZus{}summary}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Five number summary of cases
+min:     1
+Q1:      7.0
+median:  26.0
+Q3:      113.0
+max:     45223
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}131}]:} \PY{n}{case\PYZus{}hist} \PY{o}{=} \PY{n}{latest\PYZus{}date}\PY{p}{[} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{1000} \PY{p}{]}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{case\PYZus{}hist}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases per 100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZsh{} of counties}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Predicting death rate}\label{predicting-death-rate}
+
+    One statistic about the coronavirus that seems simple but is deceptively
+tricky to measure is its death rate. For instance, in Italy, the death
+rate appeared to be around 13\% in April. However, calculating a crude
+death rate (simply dividing total deaths by total cases) may not be a
+sufficient measurement. Here we'll plot the cases vs deaths by county,
+and come up with a regression line to estimate a death rate.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}284}]:} \PY{c+c1}{\PYZsh{} takes a data frame df and 2 string column names x and y}
+          \PY{c+c1}{\PYZsh{} calculates and plots a linear regression of the data }
+          \PY{k}{def} \PY{n+nf}{lin\PYZus{}regress}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{)}\PY{p}{:}
+              \PY{n}{model} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+              \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)}
+              
+              \PY{n}{xfit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}
+              \PY{n}{yfit} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{xfit}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}\PY{p}{)}
+              
+              \PY{c+c1}{\PYZsh{}plt.figure(figsize=(5,5))}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xfit}\PY{p}{,}\PY{n}{yfit}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{1}\PY{p}{)}
+          
+              \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+              
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model slope:     }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model intercept: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model r\PYZhy{}squared: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Correlation (r): }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}285}]:} \PY{n}{lin\PYZus{}regress}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deaths}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model slope:      0.05177516908439397
+Model intercept:  -0.29041299443852964
+Model r-squared:  0.8825339800769234
+Correlation (r):  0.9394327969987655
+
+    \end{Verbatim}
+
+    This model shows that, as we would expect, there is a strong correlation
+of .93 between the number of coronavirus cases in a county, and the
+number of deaths in that county. As the r-squared value tells us, about
+88\% of the variance in number of deaths can be explained by the number
+of cases.
+
+The slope of the model is .05. This means for every 1 new case in a
+county, there will be a .05 increase in deaths in the county. Put in a
+more intuitive way, for every 20 cases in a county there will be 1
+death.
+
+    \subsection{What types of counties have the most
+cases?}\label{what-types-of-counties-have-the-most-cases}
+
+In this next section, we will examine what counties are most affected by
+the virus, and see if there are any noteworthy or unexpected attributes
+that seem to correlate to cases per capita.
+
+First, let's take a look at the counties with the most cases per 100k
+citizens. I'm using the cases per 100k statistic rather than per capita
+because I find it easier to visualize, but they convey the same thing.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}102}]:} \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Five number summary of cases per 100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{five\PYZus{}num\PYZus{}summary}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+          \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{mean: }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Five number summary of cases per 100k
+min:     1.5779590677417827
+Q1:      38.69707097880246
+median:  79.66493994422446
+Q3:      193.65348247258845
+max:     14123.054423900552
+
+mean:  195.05710796317751
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{fig} \PY{o}{=} \PY{n}{px}\PY{o}{.}\PY{n}{choropleth\PYZus{}mapbox}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{,} \PY{n}{geojson}\PY{o}{=}\PY{n}{counties}\PY{p}{,} \PY{n}{locations}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                    \PY{n}{color\PYZus{}continuous\PYZus{}scale}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{viridis}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                    \PY{n}{range\PYZus{}color}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{500}\PY{p}{)}\PY{p}{,}
+                                    \PY{n}{mapbox\PYZus{}style}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{carto\PYZhy{}positron}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                                    \PY{n}{zoom}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{,} \PY{n}{center} \PY{o}{=} \PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lat}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mf}{37.0902}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lon}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{o}{\PYZhy{}}\PY{l+m+mf}{95.7129}\PY{p}{\PYZcb{}}\PY{p}{,}
+                                    \PY{n}{opacity}\PY{o}{=}\PY{l+m+mf}{0.5}                           
+                                   \PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{update\PYZus{}layout}\PY{p}{(}\PY{n}{margin}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{r}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{t}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{l}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{,}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{b}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:}\PY{l+m+mi}{0}\PY{p}{\PYZcb{}}\PY{p}{)}
+         \PY{n}{fig}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    
+    Here's what the infection rates around the country look like. Some
+counties are missing, but in general, this gives a pretty good idea of
+where the hotspots are: New England, certain southern states, some metro
+midwest areas, and even some swaths of the west. The virus certainly
+seems to be quite widespread at this point in time.
+
+I'm interested in how characteristics of counties may relate to the
+infection rate of the coronavirus. The first thing we'll look at is the
+rural-urban continuum scale, a scheme that distinguishes metro areas
+(1-3 on the scale) and non-metro areas by their population and how close
+they are to large metro areas.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}64}]:} \PY{n}{lin\PYZus{}regress}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rural\PYZus{}urban\PYZus{}continuum\PYZus{}code\PYZus{}2013}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model slope:      -20.25868418751227
+Model intercept:  290.8041828452069
+Model r-squared:  0.013650069440119816
+Correlation (r):  -0.11683351163137932
+
+    \end{Verbatim}
+
+    The correlation between rural-urban-continuum and cases per 100k looks
+quite weak. The slope is -20, meaning for each increase on the continuum
+(where higher numbers are MORE rural), you would expect a county to have
+20 fewer cases per 100k residents.
+
+Let's do a permutation test to see if this is a significant result.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{c+c1}{\PYZsh{} returns a permuted copy of a series}
+         \PY{k}{def} \PY{n+nf}{permuted\PYZus{}y}\PY{p}{(}\PY{n}{series}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{permutation}\PY{p}{(}\PY{n}{series}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}167}]:} \PY{c+c1}{\PYZsh{} takes 2 data lists of the same length = x and y, a number of times to be run  = num, and a slope for comparison}
+          \PY{c+c1}{\PYZsh{} purposes = slope}
+          \PY{c+c1}{\PYZsh{} creates num linear regressions of x and a randomly permuted version of y, and stores their slopes}
+          \PY{c+c1}{\PYZsh{} plots a histogram of the stored slopes and prints how many of these slopes are greater than your comparison}
+          \PY{c+c1}{\PYZsh{} slope}
+          \PY{k}{def} \PY{n+nf}{perm\PYZus{}test}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{num}\PY{p}{,} \PY{n}{slope}\PY{p}{)}\PY{p}{:}
+              \PY{n}{simul} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num}\PY{p}{)}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{model} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{permuted\PYZus{}y}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}
+                  \PY{n}{simul}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                  
+              \PY{n}{plt}\PY{o}{.}\PY{n}{hist}\PY{p}{(}\PY{n}{simul}\PY{p}{,} \PY{n}{bins}\PY{o}{=}\PY{l+m+mi}{30}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+              
+              \PY{k}{if} \PY{n}{slope} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{slope count out of }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{num}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ permuted samples:        }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{simul} \PY{o}{\PYZgt{}} \PY{n}{slope}\PY{p}{)}\PY{p}{)}
+                  
+              \PY{k}{else}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{count out of }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{num}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ permuted samples:               }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{simul} \PY{o}{\PYZlt{}} \PY{n}{slope}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}184}]:} \PY{c+c1}{\PYZsh{} takes 2 data lists of the same length = x and y, a number of times to be run  = num, and a correlation for }
+          \PY{c+c1}{\PYZsh{} comparison purposes = corr}
+          \PY{c+c1}{\PYZsh{} creates num correlation coefficients of x and a randomly permuted version of y, and stores this correlation}
+          \PY{c+c1}{\PYZsh{} prints how many of these correlations are greater than your comparison correlation}
+          \PY{k}{def} \PY{n+nf}{corr\PYZus{}test}\PY{p}{(}\PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{num}\PY{p}{,} \PY{n}{corr}\PY{p}{)}\PY{p}{:}
+              \PY{n}{correl} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{zeros}\PY{p}{(}\PY{n}{num}\PY{p}{)}
+              \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{num}\PY{p}{)}\PY{p}{:}
+                  \PY{n}{correl}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{x}\PY{p}{,}\PY{n}{permuted\PYZus{}y}\PY{p}{(}\PY{n}{y}\PY{p}{)}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+              
+          \PY{c+c1}{\PYZsh{}     plt.hist(correl, bins=30)}
+          \PY{c+c1}{\PYZsh{}     plt.show()}
+              
+              \PY{k}{if} \PY{n}{corr} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{correlation count out of }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{num}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ permuted samples:  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{correl} \PY{o}{\PYZgt{}} \PY{n}{corr}\PY{p}{)}\PY{p}{)}
+              \PY{k}{else}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{correlation count out of }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{num}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ permuted samples:  }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{count\PYZus{}nonzero}\PY{p}{(}\PY{n}{correl} \PY{o}{\PYZlt{}} \PY{n}{corr}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}174}]:} \PY{n}{perm\PYZus{}test}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rural\PYZus{}urban\PYZus{}continuum\PYZus{}code\PYZus{}2013}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_30_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+count out of  10000  permuted samples:                0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}185}]:} \PY{n}{corr\PYZus{}test}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rural\PYZus{}urban\PYZus{}continuum\PYZus{}code\PYZus{}2013}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{o}{.}\PY{l+m+mi}{116}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+correlation count out of  10000  permuted samples:   0
+
+    \end{Verbatim}
+
+    Out of 10,000 permuted samples of this data, none had a slope of less
+than -20, and none of them had a correlation stronger than -.116. In
+fact, it looks like none of the slopes were smaller than -10.
+Essentially, we can be quite confident that there is a relationship
+between urbanness of a county and the infection rate per 100k residents.
+
+But to be sure, let's think of this idea in another way. The urban-rural
+continuum assigns labels to counties based on the county's population
+and closeness to a metro area. Another way to think of urbanness is a
+simple measure of population density. Let's see if comparing population
+density and cases per 100k corroborates our findings about the
+urban-rural continuum.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}92}]:} \PY{n}{lin\PYZus{}regress}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_33_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model slope:      0.09862137008026778
+Model intercept:  171.84984145443613
+Model r-squared:  0.033146896551727756
+Correlation (r):  0.1820628917482298
+
+    \end{Verbatim}
+
+    Comparing density and cases per 100k actually yields a higher
+correlation than rural-urban continuum and cases per 100k. It's still
+quite a low correlation, but for such a large dataset, getting a really
+strong correlation is quite difficult.
+
+Understanding the slope of this graph is a bit abstract, so I thought
+I'd describe it here: for every 1 additional person per square mile in a
+county, you might expect the number of cases per 100k of that population
+to increase by .09. Put more plainly: for every 10 additional people per
+square mile, the cases per 100k of that county increases by one. We'll
+do a permutation test to see how significant of a result this is.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}137}]:} \PY{n}{perm\PYZus{}test}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{098}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_35_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+count out of  10000  permuted samples:   4
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}186}]:} \PY{n}{corr\PYZus{}test}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{density}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}100k}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{18}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+correlation count out of  10000  permuted samples:   5
+
+    \end{Verbatim}
+
+    Only 4 out of 10,000 permutations of the data had a slope greater than
+the slope from our actual data, and 5 had a greater correlation. This is
+a strong signal that there is, once again, a significant (but weak)
+relationship between population density and infection rate in a
+population.
+
+    \subsection{Case spread}\label{case-spread}
+
+    Another way to think about the outbreak is how fast the virus spreads
+within a county. Here we'll take a look at the counties with the highest
+cases per capita, and see how the virus has spread within the county.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}105}]:} \PY{n}{latest\PYZus{}date}\PY{o}{.}\PY{n}{sort\PYZus{}values}\PY{p}{(}\PY{n}{by}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{ascending}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}\PY{o}{.}\PY{n}{filter}\PY{p}{(}\PY{n}{items}\PY{o}{=}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Area\PYZus{}name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rural\PYZus{}urban\PYZus{}continuum\PYZus{}code\PYZus{}2013}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E\PYZus{}TOTPOP}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{first\PYZus{}day}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+              \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{spread\PYZus{}speed}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}105}]:}         FIPS             Area\_name  Rural\_urban\_continuum\_code\_2013  E\_TOTPOP  \textbackslash{}
+          94585  47169  Trousdale County, TN                              1.0      9573   
+          5763   05079    Lincoln County, AR                              3.0     13695   
+          63476  31043     Dakota County, NE                              3.0     20317   
+          53275  27105     Nobles County, MN                              7.0     21839   
+          91251  47007    Bledsoe County, TN                              8.0     14602   
+          
+                 cases  cases\_per\_capita  first\_day  spread\_speed  
+          94585   1352          0.141231       67.0    371.659327  
+          5763     853          0.062286       55.0    124.571011  
+          63476   1014          0.049909       82.0    216.995405  
+          53275   1069          0.048949       80.0    195.796511  
+          91251    601          0.041159       67.0    108.312488  
+\end{Verbatim}
+            
+    New York City is often viewed as the epicenter of the virus, so we'll
+being comparing the top 3 most infected counties to NYC.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}134}]:} \PY{n}{trousdale\PYZus{}county} \PY{o}{=} \PY{n}{fulldata}\PY{p}{[} \PY{n}{fulldata}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{47169}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{dakota\PYZus{}county} \PY{o}{=} \PY{n}{fulldata}\PY{p}{[} \PY{n}{fulldata}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{31043}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          \PY{n}{lincoln\PYZus{}county} \PY{o}{=} \PY{n}{fulldata}\PY{p}{[} \PY{n}{fulldata}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{FIPS}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{05079}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+          
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{trousdale\PYZus{}county}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{daysafter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{trousdale\PYZus{}county}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trousdale county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{lincoln\PYZus{}county}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{daysafter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{lincoln\PYZus{}county}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lincoln county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{dakota\PYZus{}county}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{daysafter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{dakota\PYZus{}county}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dakota county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{nyc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{daysafter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{nyc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{label} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{New York City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{days}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases per capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.05}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mf}{0.}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_42_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Not only do these counties have significantly higher infection rates
+than NYC, but they also appeared to have a later start to their
+outbreak, with a very rapid increase in cases per capita.
+
+There are multiple potential explanations for this. \# TODO FINISH THIS
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}133}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{trousdale\PYZus{}county}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{daysafter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{trousdale\PYZus{}county}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Trousdale county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{lincoln\PYZus{}county}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{daysafter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{lincoln\PYZus{}county}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lincoln county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{dakota\PYZus{}county}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{daysafter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{dakota\PYZus{}county}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dakota county}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{nyc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{daysafter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{log}\PY{p}{(}\PY{n}{nyc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{label}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{New York City}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          
+          \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{days}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{n}{bbox\PYZus{}to\PYZus{}anchor}\PY{o}{=}\PY{p}{(}\PY{l+m+mf}{1.05}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{borderaxespad}\PY{o}{=}\PY{l+m+mf}{0.}\PY{p}{)}
+          \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_44_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{TODO EXPLAIN WHAT THE LOG GRAPH MEANS
+LOL}\label{todo-explain-what-the-log-graph-means-lol}
+
+    \subsection{Other factors that may relate to infection
+rate}\label{other-factors-that-may-relate-to-infection-rate}
+
+    So far, we have looked at the relationship between urban-ness and
+density of counties, and concluded that they both are related to the
+cases per capita in a population. But what other factors may be
+correlated with a county's infection rate? To begin to investigate, we
+will run a for-loop calculating the correlation of cases per capita to
+all the other numerical attributes of the dataframe.
+
+It's important to note that just "brute force" testing is a perilous
+strategy for finding meaningful relationships between variables. That's
+why we will be using permutation testing on any results that do seem
+significant to analyze their validity.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}198}]:} \PY{k}{for} \PY{n}{col} \PY{o+ow}{in} \PY{n}{latest\PYZus{}date}\PY{p}{:}
+              \PY{k}{if} \PY{o+ow}{not} \PY{n+nb}{isinstance}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{o}{.}\PY{n}{values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{n+nb}{str}\PY{p}{)} \PY{o+ow}{and} \PY{n}{col} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{date}\PY{l+s+s1}{\PYZsq{}} \PY{o+ow}{and} \PY{n}{col} \PY{o}{!=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{daysafter}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}
+                  \PY{n+nb}{print}\PY{p}{(}\PY{n}{col}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{:   }\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{n}{col}\PY{p}{]}\PY{p}{,} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cases\PYZus{}per\PYZus{}capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Rural\_urban\_continuum\_code\_2013 :    -0.11686556023988795
+Urban\_influence\_code\_2013 :    -0.111119420850413
+Metro\_2013 :    0.10127533408005275
+Civilian\_labor\_force\_2018 :    0.09431427201593418
+Employed\_2018 :    0.09440068235741515
+Unemployed\_2018 :    0.09039071177711475
+Unemployment\_rate\_2018 :    -0.004011347225654298
+Median\_Household\_Income\_2018 :    0.08271130990347679
+Med\_HH\_Income\_Percent\_of\_State\_Total\_2018 :    0.05205588116855824
+cases :    0.34544928038980777
+deaths :    0.30951755353416915
+ST :    -0.056261624012769997
+AREA\_SQMI :    -0.03273860854970434
+E\_TOTPOP :    0.09321300314509945
+E\_PCI :    0.05295538575275677
+EP\_POV :    0.032735951156988456
+EP\_NOHSDP :    0.10491938411688984
+EP\_AGE65 :    -0.14021851750799783
+EP\_AGE17 :    0.04138309923698829
+EP\_DISABL :    -0.1015610729185387
+EP\_SNGPNT :    0.12103865276818669
+EP\_MINRTY :    0.18520385638397127
+EP\_LIMENG :    0.17922840198809936
+EP\_MUNIT :    0.11290810209364484
+EP\_MOBILE :    -0.025038891965960017
+EP\_CROWD :    0.05980833247499075
+EP\_NOVEH :    0.12302875426900517
+EP\_GROUPQ :    0.04952569914141109
+RPL\_THEME1 :    0.04897946937488651
+RPL\_THEME2 :    -0.06113687149414459
+RPL\_THEME3 :    0.19326767765219033
+RPL\_THEME4 :    0.10373016671849447
+RPL\_THEMES :    0.09534912500923504
+cases\_per\_capita :    1.0
+cases\_per\_100k :    0.9999999999999998
+density :    0.182039830516535
+first\_day :    -0.1503411231768797
+days\_since\_first :    0.15034112317687973
+spread\_speed :    0.6739091725984336
+
+    \end{Verbatim}
+
+    The correlations look pretty low for most of these variables; but so
+far, we have found that even results with correlations of around 0.1
+have proven to be unlikely to occur randomly, because our data set is so
+large. We don't have time to investigate all these results, but we'll
+look at some.
+
+One interesting aspect of the SVI data are its the RPL\_Themes. This is
+one of the ways that vulnerability is measured. The measurements of the
+SVI data (such as EP\_AGE65), are assigned to 1 of 4 themes, each a
+different type of social disadvantage. The RPL represents a percentile
+score for each county for each vulnerability theme. The closer a
+county's rank is to 1, the more "vulnerable" it is.
+
+The theme ranking variables are: - RPL\_THEME1: Socioeconomic -
+RPL\_THEME2: Household Composition \& Disability - RPL\_THEME3: Minority
+Status \& Language - RPL\_THEME4: Housing Type \& Transportation -
+RPL\_THEMES: Composite of all themes
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}199}]:} \PY{n}{five\PYZus{}num\PYZus{}summary}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RPL\PYZus{}THEMES}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+min:     0.0
+Q1:      0.26785000000000003
+median:  0.5143
+Q3:      0.75905
+max:     1.0
+
+    \end{Verbatim}
+
+    To be able to run a clustering algorithm of interest, the variables we
+are clustering should be relatively close in scale. Thus, I added a
+column to latest date of the percentile of cases per capita. Now this
+data is also scaled from 0 to 1.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}324}]:} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percentile\PYZus{}cases\PYZus{}per\PYZus{}cap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{=}\PY{n}{latest\PYZus{}date}\PY{o}{.}\PY{n}{cases\PYZus{}per\PYZus{}capita}\PY{o}{.}\PY{n}{rank}\PY{p}{(}\PY{n}{pct}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+          
+          \PY{n}{five\PYZus{}num\PYZus{}summary}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percentile\PYZus{}cases\PYZus{}per\PYZus{}cap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+min:     0.0003497726477789437
+Q1:      0.2502623294858342
+median:  0.5001748863238895
+Q3:      0.7500874431619446
+max:     1.0
+
+    \end{Verbatim}
+
+    The correlation tests we ran on all the non-string data indicated there
+might be a significant relationship between RPL\_THEME3 (Minority status
+and language) and cases per capita. We will perform a linear regression
+on this ranked data and also attempt to cluster the data into meaningful
+groups.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}343}]:} \PY{c+c1}{\PYZsh{} takes a dataframe = df, two string column names from the dataframe = x and y, and a desired number of }
+          \PY{c+c1}{\PYZsh{} clusters = clus}
+          \PY{c+c1}{\PYZsh{} plots a linear regression and clustering of the data}
+          \PY{k}{def} \PY{n+nf}{cluster\PYZus{}and\PYZus{}regress}\PY{p}{(}\PY{n}{df}\PY{p}{,} \PY{n}{x}\PY{p}{,} \PY{n}{y}\PY{p}{,} \PY{n}{clus}\PY{p}{)}\PY{p}{:}
+              \PY{n}{model} \PY{o}{=} \PY{n}{LinearRegression}\PY{p}{(}\PY{n}{fit\PYZus{}intercept}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+              \PY{n}{model}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)}
+          
+              \PY{n}{xfit} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{linspace}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{p}{)}\PY{p}{,}\PY{l+m+mi}{1000}\PY{p}{)}
+              \PY{n}{yfit} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{predict}\PY{p}{(}\PY{n}{xfit}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{n}{np}\PY{o}{.}\PY{n}{newaxis}\PY{p}{]}\PY{p}{)}
+          
+              \PY{n}{arr} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{stack}\PY{p}{(}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+          
+              \PY{n}{kmeans} \PY{o}{=} \PY{n}{KMeans}\PY{p}{(}\PY{n}{n\PYZus{}clusters}\PY{o}{=}\PY{n}{clus}\PY{p}{)}
+              \PY{n}{kmeans}\PY{o}{.}\PY{n}{fit}\PY{p}{(}\PY{n}{arr}\PY{p}{)}
+          
+              \PY{n}{plt}\PY{o}{.}\PY{n}{figure}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,}\PY{l+m+mi}{6}\PY{p}{)}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{xfit}\PY{p}{,}\PY{n}{yfit}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{red}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{arr}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,}\PY{n}{arr}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{c}\PY{o}{=}\PY{n}{kmeans}\PY{o}{.}\PY{n}{labels\PYZus{}}\PY{p}{,} \PY{n}{cmap}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{viridis}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{alpha}\PY{o}{=}\PY{o}{.}\PY{l+m+mi}{2}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{scatter}\PY{p}{(}\PY{n}{kmeans}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{]} \PY{p}{,}\PY{n}{kmeans}\PY{o}{.}\PY{n}{cluster\PYZus{}centers\PYZus{}}\PY{p}{[}\PY{p}{:}\PY{p}{,}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{,} \PY{n}{color}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{black}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+              
+              \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{n}{y}\PY{p}{)}
+              \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+              
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model slope:     }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{coef\PYZus{}}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model intercept: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{intercept\PYZus{}}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Model r\PYZhy{}squared: }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{model}\PY{o}{.}\PY{n}{score}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+              \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Correlation (r): }\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{np}\PY{o}{.}\PY{n}{corrcoef}\PY{p}{(}\PY{n}{df}\PY{p}{[}\PY{n}{x}\PY{p}{]}\PY{p}{,} \PY{n}{df}\PY{p}{[}\PY{n}{y}\PY{p}{]}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}344}]:} \PY{n}{cluster\PYZus{}and\PYZus{}regress}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RPL\PYZus{}THEME3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percentile\PYZus{}cases\PYZus{}per\PYZus{}cap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_55_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model slope:      0.3262627767306959
+Model intercept:  0.33313523735260864
+Model r-squared:  0.10278797173565435
+Correlation (r):  0.320605632726024
+
+    \end{Verbatim}
+
+    This is a bit of a scary looking visualization at first. It looks like
+almost the entire grid is covered in points. However, there does seem to
+be a trend to the data. The top right corner (and bottom left corner, to
+a lesser extent) look more densely concentrated. The upper left corner
+is much sparser than the rest of the graph.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}346}]:} \PY{n}{perm\PYZus{}test}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RPL\PYZus{}THEME3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percentile\PYZus{}cases\PYZus{}per\PYZus{}cap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{32}\PY{p}{)}
+          
+          \PY{n}{corr\PYZus{}test}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RPL\PYZus{}THEME3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percentile\PYZus{}cases\PYZus{}per\PYZus{}cap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{32}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+slope count out of  10000  permuted samples:         0
+correlation count out of  10000  permuted samples:   0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}347}]:} \PY{n}{cluster\PYZus{}and\PYZus{}regress}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RPL\PYZus{}THEME1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percentile\PYZus{}cases\PYZus{}per\PYZus{}cap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+m+mi}{4}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_58_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model slope:      0.010438885855453535
+Model intercept:  0.4948700738298156
+Model r-squared:  0.00010714969576552935
+Correlation (r):  0.010351313721719992
+
+    \end{Verbatim}
+
+    In this case, the slope is practically a flat line and indeed, the data
+seems almost uniformly distributed across the grid. Indeed, in the
+permutation tests of slope and correlation, we see that about 30\% of
+the permutations slopes and correlations pass this threshold. In other
+words, this
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}332}]:} \PY{n}{perm\PYZus{}test}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RPL\PYZus{}THEME1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{]}\PY{p}{,} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percentile\PYZus{}cases\PYZus{}per\PYZus{}cap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{01}\PY{p}{)}
+          
+          \PY{n}{corr\PYZus{}test}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RPL\PYZus{}THEME1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{latest\PYZus{}date}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percentile\PYZus{}cases\PYZus{}per\PYZus{}cap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{l+m+mi}{10000}\PY{p}{,} \PY{o}{.}\PY{l+m+mi}{01}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_60_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+slope count out of  10000  permuted samples:         2899
+correlation count out of  10000  permuted samples:   2963
+
+    \end{Verbatim}
+
+    It definitely appears that there is a relationship in cases per capita
+and social vulnerability related to minority status. It's worth noting
+that there is a relationship between the SVI theme 3 and type of county
+one lives in. Counties that are more metro rank higher on average for
+theme 3 than more rural counties. This relationship is shown in the
+following regression:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}348}]:} \PY{n}{lin\PYZus{}regress}\PY{p}{(}\PY{n}{latest\PYZus{}date}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Rural\PYZus{}urban\PYZus{}continuum\PYZus{}code\PYZus{}2013}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{RPL\PYZus{}THEME3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_62_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+Model slope:      -0.028948214580071147
+Model intercept:  0.6488019669886328
+Model r-squared:  0.07127746654319833
+Correlation (r):  -0.2669784008926534
+
+    \end{Verbatim}
+
+    However, I don't think this relationship entirely invalidates either
+relationship to cases per capita. If I had more time, I might consider
+running a multiple regression between the features I compared to see
+which seem to have the strongest predictive power over cases per capita.
+
+    \subsection{Conclusions}\label{conclusions}
+
+    \subsection{Acknowledgements}\label{acknowledgements}
+
+    Thank you to The New York Times, the CDC, and the USDA Economic Research
+Service for collecting and publishing the data I used in this project
+for open access.
+
+Thank you to Professor Mimno and all the course staff who have been so
+helpful and accommodating all semester, especially during the transition
+to virtual instruction. This class has taught me a lot.
+
+Thank you to my mom, who called my chloropleth county graph "really
+cool" when I showed it to her.
+
+Thank you to the Stack Overflow users who have already asked and
+answered "wait, but how do I do this?" every time I tried to use a new
+feature.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
